@@ -22,10 +22,27 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
     $router->post('actors', ['uses' => 'ActorController@create']);
 
-    $router->get('actors/{id}', ['uses' => 'ActorController@read']);
+    $router->get('actor/{id}', ['uses' => 'ActorController@read']);
 
-    $router->put('actors/{id}', ['uses' => 'ActorController@update']);
+    $router->put('actor/{id}', ['uses' => 'ActorController@update']);
 
-    $router->delete('actors/{id}', ['uses' => 'ActorController@delete']);
+    $router->delete('actor/{id}', ['uses' => 'ActorController@delete']);
+
+  });
+
+   $router->group(['prefix' => 'api'], function () use ($router) {
+   $router->get('movies',  ['uses' => 'MovieController@all']);
+
+    $router->post('movie/create', ['uses' => 'MovieController@create']);
+
+    $router->get('movie/{id}', ['uses' => 'MovieController@read']);
+
+    $router->put('movie/{id}', ['uses' => 'MovieController@update']);
+
+    $router->delete('movie/{id}', ['uses' => 'MovieController@delete']);
+
+    $router->get('movie/year/{year}', ['uses' => 'MovieController@moviesByYear']);
+
+    $router->get('movie/actor/{actor}', ['uses' => 'MovieController@actorMovies']);
 
   });
