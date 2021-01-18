@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\ActorMiddleware;
 use App\Models\Actor;
 use Illuminate\Http\Request;
 
 class ActorController extends Controller
 {
 
-
+    public function __construct()
+    {
+        $this->middleware(ActorMiddleware::class);
+    }
     //show all  actors
     public function all()
     {
