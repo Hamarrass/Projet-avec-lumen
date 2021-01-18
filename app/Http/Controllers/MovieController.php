@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\MovieMiddleware;
 use App\Models\Actor;
 use App\Models\Movie;
 use Illuminate\Http\Request;
@@ -10,6 +11,10 @@ use Illuminate\Support\Facades\DB;
 class MovieController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware(MovieMiddleware::class);
+    }
 
     //show all  Movie
     public function all()
@@ -61,7 +66,6 @@ class MovieController extends Controller
     //list all movies for a given year
     public function moviesByYear($year)
     {
-
        $movies = Movie::where('year', $year)->get();
         return response($movies, 200);
     }
@@ -69,8 +73,7 @@ class MovieController extends Controller
     //list the films of an actor by his {id}
     public function actorMovies($actor ,Request $request){
 
-        dd($request->header('token'));
-
+      //  dd('okay');
         $movies = Movie::all();
         $moviesActor = [];
 
